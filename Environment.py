@@ -22,6 +22,19 @@ class IO_Environment:
 
         return s,r
 
+    def put_out_action(a):
+        work = np.argmax(a[0])
+            if(work==0):
+                ser.write(chr(0x01).encode("utf-8")) # 写数据
+                print("UP!!!")
+            elif(work==1):
+                ser.write(chr(0x02).encode("utf-8")) # 写数据
+                print("DOWN!!!")
+            else:
+                ser.write(chr(0x03).encode("utf-8")) # 写数据
+                print("DO NOT MOVE!!!")
+    
+
         
 
 
