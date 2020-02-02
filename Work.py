@@ -1,4 +1,3 @@
-#V0.1
 from Brain import*
 from Environment import*
 
