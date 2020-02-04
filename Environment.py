@@ -1,11 +1,12 @@
 import sys, os
 import serial
 import numpy as np
-
+import random
 
 class IO_Environment():
 
     def __init__(self):
+        self.explore_rate=2
         self.portx = "COM3"
         self.bps = 9600
         self.timex = None
@@ -24,6 +25,10 @@ class IO_Environment():
 
     def put_out_action(self,a):
         work = np.argmax(a[0])
+        rand=random.randint(0,9)
+
+        if(rand<self.explore_rate)work=random(0,2)
+
         if(work==0):
             self.ser.write(chr(0x01).encode("utf-8")) # 写数据
             print("UP!!!")
