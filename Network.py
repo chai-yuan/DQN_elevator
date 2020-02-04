@@ -31,8 +31,7 @@ class Network:
         
     # x:输入数据, t:监督数据
     def loss(self, x, t):
-        y = self.predict(x)
-        return self.lastLayer.forward(y, t)
+        return self.lastLayer.forward(x, t)
     
     def accuracy(self, x, t):
         y = self.predict(x)
