@@ -3,36 +3,36 @@ import serial
 import numpy as np
 
 
-class IO_Environment:
+class IO_Environment():
 
     def __init__(self):
-        portx = "COM3"
-        bps = 9600
-        timex = None
-        self.ser = serial.Serial(portx, bps, timeout=timex)
+        self.portx = "COM3"
+        self.bps = 9600
+        self.timex = None
+        self.ser = serial.Serial(self.portx, self.bps, timeout=self.timex)
 
-    def get_environment():
+    def get_environment(self):
         number=[]
-        lines=self.ser.readline()
+        lines= self.ser.readline()
         print(lines)
         for i in range(0,11):
             number.append(float(lines[i])-48.0)
         r=(float(lines[11])-48.0)*0.5 
-        s=np.arange(number)
+        s=np.array(number)
 
         return s,r
 
-    def put_out_action(a):
+    def put_out_action(self,a):
         work = np.argmax(a[0])
-            if(work==0):
-                ser.write(chr(0x01).encode("utf-8")) # 写数据
-                print("UP!!!")
-            elif(work==1):
-                ser.write(chr(0x02).encode("utf-8")) # 写数据
-                print("DOWN!!!")
-            else:
-                ser.write(chr(0x03).encode("utf-8")) # 写数据
-                print("DO NOT MOVE!!!")
+        if(work==0):
+            self.ser.write(chr(0x01).encode("utf-8")) # 写数据
+            print("UP!!!")
+        elif(work==1):
+            self.ser.write(chr(0x02).encode("utf-8")) # 写数据
+            print("DOWN!!!")
+        else:
+            self.ser.write(chr(0x03).encode("utf-8")) # 写数据
+            print("DO NOT MOVE!!!")
     
 
         
