@@ -4,7 +4,7 @@ import numpy as np
 from Network import Network
 from Memory import Memory_library
 
-memory_size = Memory_library(30)
+memory = Memory_library(30)
 learning_rate = 0.1
 greedy_rate = 0.8
 eval_net = Network(input_size=11,hidden_size=10,output_size=3)
