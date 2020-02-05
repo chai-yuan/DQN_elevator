@@ -2,9 +2,8 @@
 import sys, os
 import numpy as np
 from Network import Network
-from Memory import Memory_library
+from Memory import *
 
-memory = Memory_library(30)
 learning_rate = 0.1
 greedy_rate = 0.8
 eval_net = Network(input_size=11,hidden_size=10,output_size=3)
@@ -22,4 +21,8 @@ def learn(s,a,r,_s):
     grad = eval_net.gradient(a,_a)
     for key in ('W1', 'b1', 'W2', 'b2'):
         eval_net.params[key] += learning_rate * grad[key]
+    
+def learn_from_Memory(batch_size):
+    batch_data = get_batch(batch_size)
+    
     
