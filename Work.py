@@ -3,14 +3,11 @@ from Environment import*
 import tkinter as tk
 
 win = tk.Tk()
-win.title('By CRI V0.3.2')
+win.title('By CRI V0.3.3')
 win.geometry('400x200')
 
-
-for episode in range(10):
-
+def work_loop():
     state,reward =IO_Environment().get_environment()
-
     while True:
         #选择当前动作
         action = choice_action(state)
@@ -23,3 +20,8 @@ for episode in range(10):
         #环境交替
         state=_state
 
+
+button1 = tk.Button(win,text="开始工作",command=work_loop)
+button1.pack()
+
+win.mainloop()
