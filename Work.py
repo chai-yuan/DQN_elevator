@@ -1,5 +1,11 @@
 from Brain import*
 from Environment import*
+import tkinter as tk
+
+win = tk.Tk()
+win.title('By CRI V0.3.2')
+win.geometry('400x200')
+
 
 for episode in range(10):
 
