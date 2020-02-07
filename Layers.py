@@ -74,9 +74,9 @@ class SoftmaxWithLoss:
         self.t = None # 监督数据
 
     def forward(self, x, t):
-        self.t = softmax(t)
-        self.y = softmax(x)
-        self.loss = cross_entropy_error(self.y, self.t)
+        self.t = t
+        self.y = x
+        self.loss = mean_squared_error(self.y,self.t)
         
         return self.loss
 

@@ -3,7 +3,7 @@ import numpy as np
 from Layers import *
 from Gradient import numerical_gradient
 from collections import OrderedDict
-
+from functions import *
 
 class Network:
 
@@ -22,12 +22,14 @@ class Network:
         self.layers['Affine2'] = Affine(self.params['W2'], self.params['b2'])
 
         self.lastLayer = SoftmaxWithLoss()
+
+        self._loss=[]
         
     def predict(self, x):
         for layer in self.layers.values():
             x = layer.forward(x)
         
-        return x
+        return softmax(x)
         
     # x:输入数据, t:监督数据
     def loss(self, x, t):
@@ -55,8 +57,8 @@ class Network:
         
     def gradient(self, x, t):
         # forward
-        self.loss(x, t)
-        
+        e_loss = self.loss(x, t)
+        self._loss.append(e_loss)
         # backward
         dout = 1
         dout = self.lastLayer.backward(dout)
