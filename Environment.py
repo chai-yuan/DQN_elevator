@@ -27,7 +27,7 @@ class IO_Environment():
         work = np.argmax(a[0])
         rand=random.randint(0,9)
 
-        if(rand<self.explore_rate)work=random(0,2)
+        if(rand<self.explore_rate):work=random(0,2)
 
         if(work==0):
             self.ser.write(chr(0x01).encode("utf-8")) # 写数据

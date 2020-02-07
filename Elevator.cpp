@@ -1,5 +1,5 @@
 /*----------------------------------------------------------
-V0.2.10
+V0.3.4
 --------------------------------------------------------*/
 
 #include <lzFreeRTOS.h> 
@@ -45,7 +45,7 @@ int wait_in=0,plan_to[5]={0};
 int wait[5][2]={0};
 int to[5]={0};
 int time=0;
-int cost=0,work=0;
+int reward=0,work=0;
 int up=0,down=0;
 char customKey;
 //-----------工作函数----------------------------
@@ -56,12 +56,12 @@ void serial_print(){
 		if(i!=1)Serial.print(wait[i][0]);
 		Serial.print(plan_to[i]);
 	}
-	Serial.print(cost);
+	Serial.print(reward);
 	Serial.print('\n');
 }
 
-int cost_calculation(){
-	int _cost=0;
+int reward_calculation(){
+	int _reward=0;
 	for(int i=0;i<5;i++){
 		_cost+=abs(now_h-i)*wait[i][0];
 		_cost+=abs(now_h-i)*wait[i][0];
@@ -71,7 +71,7 @@ int cost_calculation(){
 }
 
 void moving(int _how){
-	if(_how==1){
+	if(_how==0){
 		if(now_h!=4){
 			steppermotor.step(3900);
 			now_h++;
@@ -80,7 +80,7 @@ void moving(int _how){
 			vTaskDelay(20);
 		}
 	}
-	else if(_how==2){
+	else if(_how==1){
 		if(now_h!=1){
 			steppermotor.step(-3900);
 			now_h--;
@@ -152,7 +152,7 @@ void v_moving_Task(void *pvParameters){
     steppermotor.setSpeed(1100); 
     while(1){
 		vTaskDelay(100);
-		cost = cost_calculation();
+		reward = reward_calculation();
 		serial_print();
 		if(Serial.available()){
 			work=Serial.read();
